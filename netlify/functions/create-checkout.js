@@ -19,7 +19,7 @@ exports.handler = async (event) => {
       ],
       // UPDATED: Using APP_URL instead of URL
       success_url: `${process.env.APP_URL}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.APP_URL}/`,
+      cancel_url: `${process.env.APP_URL}/cancel.html`,
     });
 
     return {
