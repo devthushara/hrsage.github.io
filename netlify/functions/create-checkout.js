@@ -17,9 +17,9 @@ exports.handler = async (event) => {
           quantity: 1,
         },
       ],
-      // Redirect users here after payment
-      success_url: `${process.env.URL}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.URL}/`,
+      // UPDATED: Using APP_URL instead of URL
+      success_url: `${process.env.APP_URL}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.APP_URL}/`,
     });
 
     return {
