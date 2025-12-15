@@ -1,19 +1,27 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async (event) => {
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method Not Allowed' };
+  const sessionId = event.queryStringParameters.session_id;
+
+  if (!sessionId) {
+    return { statusCode: 400, body: JSON.stringify({ error: "Missing session_id" }) };
   }
-  
-  const { customerId } = JSON.parse(event.body); // You must store this ID when they sign up
 
-  const session = await stripe.billingPortal.sessions.create({
-    customer: customerId,
-    return_url: process.env.URL,
-  });
+  try {
+    // 1. Retrieve the session from Stripe to get the customer details
+    const session = await stripe.checkout.sessions.retrieve(sessionId);
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ url: session.url }),
-  };
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        email: session.customer_details.email, // The email they typed in Stripe
+        name: session.customer_details.name    // Optional: their name
+      }),
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: error.message }),
+    };
+  }
 };
