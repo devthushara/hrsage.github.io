@@ -1,0 +1,8 @@
+{
+  "name": "hr-sage-stripe",
+  "version": "1.0.0",
+  "description": "Stripe integration for HR Sage",
+  "dependencies": {
+    "stripe": "^14.0.0"
+  }
+}
