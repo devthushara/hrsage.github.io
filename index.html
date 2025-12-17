@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HR SAGE - The Expert-Verified HR Companion for Malaysia</title>
+    <title>HR SAGE - The Expert-Verified HR Companion</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,51 +15,64 @@
     <script src="https://js.stripe.com/v3/"></script>
     
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        sage: {
-                            900: '#344C3D', 
-                            800: '#455e4e',
-                            700: '#738A6E', 
-                            600: '#8FA38A',
-                            500: '#AABCAA',
-                            300: '#C4D1C4',
-                            100: '#D9E5D7', 
-                            50: '#F0F4F0',
-                        },
-                        neutral: {
-                            900: '#5F5A4F', 
-                            100: '#F5F4EE', 
-                        },
-                        brand: {
-                            black: '#28252F', 
-                        }
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    cream: {
+                        50: '#FFFFFF',
+                        100: '#FDFBF7', // Main Background
+                        200: '#F2EDE4',
+                        300: '#EBE9E2', // Toggle Background
                     },
-                    fontFamily: {
-                        heading: ['Poppins', 'sans-serif'],
-                        body: ['Karla', 'sans-serif'],
+                    sage: {
+                        900: '#1A2F23', // Deep Text / Footer BG
+                        800: '#355143', // Primary Green
+                        700: '#4A6755', 
+                        600: '#6A7F66', // Green Buttons
+                        500: '#7FA99B', // Teal Badge
+                        400: '#94A894',
+                        100: '#E3EBE3', 
                     },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'blink': 'blink 1s step-end infinite',
+                    accent: {
+                        beige: '#B4A996', // Individual Button
+                        gold: '#DBC086',  // Gold Badge
+                        red: '#EF4444',   // Warning Icons
+                    }
+                },
+                fontFamily: {
+                    heading: ['Poppins', 'sans-serif'],
+                    body: ['Karla', 'sans-serif'],
+                },
+                boxShadow: {
+                    'soft': '0 20px 40px -10px rgba(0, 0, 0, 0.05)',
+                    'card': '0 10px 30px -5px rgba(0, 0, 0, 0.05)',
+                },
+                animation: {
+                    'float': 'float 6s ease-in-out infinite',
+                    'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    'blink': 'blink 1s step-end infinite',
+                    'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                },
+                keyframes: {
+                    float: {
+                        '0%, 100%': { transform: 'translateY(0)' },
+                        '50%': { transform: 'translateY(-15px)' },
                     },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-15px)' },
-                        },
-                        blink: {
-                            '0%, 100%': { opacity: '1' },
-                            '50%': { opacity: '0' },
-                        }
+                    fadeInUp: {
+                        '0%': { opacity: '0', transform: 'translateY(20px)' },
+                        '100%': { opacity: '1', transform: 'translateY(0)' },
+                    },
+                    blink: {
+                        '0%, 100%': { opacity: '1' },
+                        '50%': { opacity: '0' },
                     }
                 }
             }
         }
+    }
     </script>
+
     <style>
         .chat-scroll::-webkit-scrollbar { width: 6px; }
         .chat-scroll::-webkit-scrollbar-track { background: transparent; }
@@ -71,313 +84,246 @@
             color: #344C3D;
         }
 
-        .glass {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-        
-        .max-h-0 { max-height: 0; overflow: hidden; }
-        .max-h-screen { max-height: 1200px; overflow: hidden; } 
-        .transition-max-height { transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        /* Mix-blend utility for illustrations */
+        .mix-blend-multiply { mix-blend-mode: multiply; }
     </style>
 </head>
-<body class="bg-neutral-100 text-neutral-900 font-body antialiased overflow-x-hidden">
+<body class="bg-cream-100 text-[#1A1A1A] font-body antialiased overflow-x-hidden">
 
-    <nav class="fixed w-full z-50 glass border-b border-white/20 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <div class="flex-shrink-0 flex items-center gap-2">
-                    <div class="w-8 h-8 bg-sage-900 rounded-lg flex items-center justify-center text-white">
-                        <i class="fa-solid fa-scale-balanced text-sm"></i>
-                    </div>
-                    <a href="#" class="font-heading font-bold text-2xl text-brand-black tracking-tight">HR SAGE</a>
+    <div class="fixed w-full z-50 top-0 pt-4 px-4 sm:px-6 lg:px-8 transition-all duration-300">
+        <nav class="max-w-7xl mx-auto bg-white/90 backdrop-blur-xl border border-white/40 shadow-soft rounded-full px-6 h-20 flex justify-between items-center">
+            <div class="flex-shrink-0 flex items-center gap-2">
+                <div class="w-9 h-9 bg-sage-900 rounded-full flex items-center justify-center text-white shadow-md">
+                    <i class="fa-solid fa-scale-balanced text-xs"></i>
                 </div>
+                <a href="#" class="font-heading font-bold text-xl text-sage-900 tracking-tight">HR SAGE</a>
+            </div>
+            
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#features" class="text-gray-600 hover:text-sage-900 font-medium text-sm transition-colors">Product</a>
+                <a href="#pricing" class="text-gray-600 hover:text-sage-900 font-medium text-sm transition-colors">Pricing</a>
+                <a href="#learning" class="text-gray-600 hover:text-sage-900 font-medium text-sm transition-colors">Resources</a>
+            </div>
+            
+            <div class="hidden md:flex items-center space-x-3">
+                <a href="https://malaysia-industrial-case-awards.kenja.com/" class="text-sage-900 font-bold text-sm px-4 hover:opacity-70">
+                    Login
+                </a>
+                <a href="#pricing" class="bg-sage-900 hover:bg-sage-800 text-white font-bold text-sm px-6 py-3 rounded-full transition-all shadow-lg hover:-translate-y-0.5">
+                    Get Started
+                </a>
+            </div>
+
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-btn" class="text-sage-900 p-2 focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+        
+        <div id="mobile-menu" class="hidden md:hidden absolute top-28 left-4 right-4 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden p-4 space-y-2 z-50">
+            <a href="#features" class="block px-4 py-3 rounded-xl hover:bg-cream-200 text-sage-900 font-medium">Product</a>
+            <a href="#pricing" class="block px-4 py-3 rounded-xl hover:bg-cream-200 text-sage-900 font-medium">Pricing</a>
+            <a href="#learning" class="block px-4 py-3 rounded-xl hover:bg-cream-200 text-sage-900 font-medium">Resources</a>
+        </div>
+    </div>
+
+    <section class="relative pt-44 pb-20 bg-cream-100 overflow-hidden flex flex-col items-center">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center">
+            
+            <div class="relative animate-fade-in-up mb-12">
+                <img src="https://placehold.co/100x100/transparent/AABCAA?text=✨" alt="Sparkle" class="absolute -top-12 left-0 lg:-left-20 w-16 h-16 opacity-60 animate-pulse-slow">
+                <img src="https://placehold.co/150x150/transparent/2C4033?text=Robot" alt="Robot" class="absolute -top-10 right-0 lg:-right-32 w-24 h-24 lg:w-32 lg:h-32 animate-float hidden sm:block opacity-80">
+
+                <h1 class="font-heading font-bold text-5xl lg:text-7xl text-[#1A1A1A] leading-[1.1] mb-6 tracking-tight">
+                    The Expert-Verified <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-sage-800 to-sage-600">HR Companion.</span>
+                </h1>
                 
-                <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#features" class="text-neutral-900 hover:text-sage-700 font-medium transition-colors">Features</a>
-                    <a href="#pricing" class="text-neutral-900 hover:text-sage-700 font-medium transition-colors">Pricing</a>
-                    <a href="#learning" class="text-neutral-900 hover:text-sage-700 font-medium transition-colors">Learning Hub</a>
-                </div>
+                <p class="text-gray-600 text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
+                    Instant, cited answers derived strictly from the <strong class="text-[#1A1A1A]">Employment Act 1955</strong> and <strong class="text-[#1A1A1A]">Industrial Court Awards</strong>.
+                </p>
                 
-                <div class="hidden md:flex items-center space-x-4">
-                    <a href="https://malaysia-industrial-case-awards.kenja.com/" class="text-neutral-900 hover:text-sage-700 font-medium px-4 py-2">
-                        <i class="fa-solid fa-right-to-bracket mr-2"></i>Login
-                    </a>
-                    <a href="#pricing" class="bg-sage-900 hover:bg-sage-700 text-white font-medium px-6 py-2.5 rounded-lg transition-all shadow-lg shadow-sage-900/20 hover:shadow-sage-900/40 hover:-translate-y-0.5">
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <button class="px-8 py-3.5 rounded-full text-[#1A1A1A] border border-gray-300 hover:bg-white hover:shadow-md transition-all flex items-center gap-2 font-bold bg-transparent">
+                        <i class="fa-solid fa-play-circle text-xl"></i> Demo video
+                    </button>
+                    <button onclick="window.location.href='#pricing'" class="bg-sage-900 text-white font-bold px-8 py-3.5 rounded-full transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
                         Get Started
-                    </a>
-                </div>
-
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-brand-black p-2 focus:outline-none">
-                        <i class="fa-solid fa-bars text-xl"></i>
                     </button>
                 </div>
             </div>
-        </div>
 
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-100 absolute w-full shadow-xl">
-            <div class="px-4 pt-2 pb-6 space-y-2">
-                <a href="#features" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-sage-900 hover:bg-sage-50">Features</a>
-                <a href="#pricing" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-sage-900 hover:bg-sage-50">Pricing</a>
-                <a href="#learning" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-sage-900 hover:bg-sage-50">Learning Hub</a>
-                <a href="#pricing" class="block px-3 py-3 rounded-md text-base font-semibold text-white bg-sage-900 hover:bg-sage-700">Get Started</a>
-                <a href="https://malaysia-industrial-case-awards.kenja.com/" class="block px-3 py-3 rounded-md text-base font-medium text-sage-900 bg-sage-50 hover:bg-sage-100 hover:text-sage-900">Login</a>
-            </div>
-        </div>
-    </nav>
-
-    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-sage-900 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-sage-900 via-[#2C4033] to-[#1F2D24]"></div>
-        <div class="absolute top-0 left-0 w-full h-full opacity-5 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-        <div class="absolute top-20 right-0 w-[800px] h-[800px] bg-sage-700/20 rounded-full blur-[100px] animate-pulse-slow pointer-events-none"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-16 lg:gap-12 items-center">
-                <div class="text-center lg:text-left animate-fade-in-up">
-                    <h1 class="font-heading font-bold text-4xl lg:text-5xl xl:text-6xl text-white leading-[1.15] mb-6 drop-shadow-sm">
-                        The Expert-Verified <br>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-sage-100 to-white">HR Companion.</span>
-                    </h1>
-                    <p class="text-sage-100 text-lg mb-10 max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
-                        Instant, cited answers derived strictly from the <strong class="text-white font-medium">Employment Act 1955</strong> and <strong class="text-white font-medium">Industrial Court Awards</strong>. 
-                        <br><span class="opacity-80 text-sm mt-2 block"><i class="fa-solid fa-check text-green-400 mr-1"></i> Zero Hallucinations. 100% Private.</span>
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <a href="#pricing" class="bg-white text-sage-900 font-bold px-8 py-4 rounded-xl transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:-translate-y-1 flex items-center justify-center gap-2">
-                            Get Early Access <i class="fa-solid fa-arrow-right text-sm"></i>
-                        </a>
-                        <a href="#methodology" class="px-8 py-4 rounded-xl text-white border border-sage-700 hover:bg-sage-800 transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-book-open"></i> How it works
-                        </a>
+            <div class="relative w-full max-w-2xl mx-auto mt-8">
+                <div class="absolute inset-0 bg-sage-300/30 rounded-[3rem] blur-3xl transform scale-95 translate-y-4"></div>
+                
+                <div class="relative bg-white rounded-3xl shadow-2xl border border-white/60 flex flex-col h-[550px] overflow-hidden ring-1 ring-black/5">
+                    <div class="bg-white/95 backdrop-blur-sm border-b border-gray-100 p-4 flex items-center justify-between z-20">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-sage-100 border border-sage-200 flex items-center justify-center text-sage-800">
+                                <i class="fa-solid fa-robot text-sm"></i>
+                            </div>
+                            <div class="text-left">
+                                <h3 class="text-sm font-bold text-sage-900 leading-tight">HR Sage AI</h3>
+                                <span class="text-[10px] text-gray-500 block">Malaysian Employment Act 1955</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="relative mx-auto w-full max-w-md lg:max-w-full">
-                    <div class="absolute -inset-4 bg-gradient-to-r from-sage-700 to-sage-500 rounded-3xl blur-2xl opacity-20"></div>
-                    <div class="relative bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden border border-white/20 animate-float flex flex-col h-[550px]">
-                        <div class="bg-sage-50/80 border-b border-gray-100 p-4 flex items-center justify-between z-20">
-                            <div class="flex items-center gap-3">
-                                <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
-                                <span class="text-xs text-sage-900 font-bold uppercase tracking-wider flex items-center gap-1.5">
-                                    <i class="fa-solid fa-robot text-sage-600"></i> HR Sage AI
-                                </span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <span class="text-[10px] bg-sage-100 text-sage-800 px-2 py-0.5 rounded border border-sage-200 flex items-center gap-1">
-                                    <i class="fa-solid fa-lock text-[8px]"></i> Private Vault
-                                </span>
-                            </div>
+                    <div id="chat-display" class="flex-1 p-6 space-y-6 overflow-y-auto chat-scroll bg-[#F9FAF9]"></div>
+
+                    <div class="p-4 bg-white border-t border-gray-100 z-20">
+                         <div class="mb-3 flex justify-center gap-2">
+                            <button onclick="quickAsk('Can I fire a probationer without notice?')" class="text-[10px] bg-gray-50 text-gray-600 px-3 py-1.5 rounded-full border border-gray-200 hover:bg-gray-100 transition-all font-medium">
+                                Fire probationer?
+                            </button>
+                            <button onclick="quickAsk('Calculate OT for public holiday')" class="text-[10px] bg-gray-50 text-gray-600 px-3 py-1.5 rounded-full border border-gray-200 hover:bg-gray-100 transition-all hidden sm:block font-medium">
+                                OT Calculation
+                            </button>
                         </div>
-                        <div id="chat-display" class="flex-1 p-6 space-y-5 overflow-y-auto chat-scroll bg-gradient-to-b from-white to-[#F9FAF9]"></div>
-                        <div class="p-4 bg-white border-t border-gray-100 z-20 shadow-[0_-5px_20px_rgba(0,0,0,0.03)]">
-                            <div class="mb-3 flex flex-wrap gap-2 justify-center sm:justify-start">
-                                <button onclick="quickAsk('Can I fire a probationer without notice?')" class="text-[11px] bg-sage-50 text-sage-800 px-3 py-1.5 rounded-full border border-sage-200 hover:bg-sage-100 transition-all cursor-pointer">
-                                    Can I fire a probationer?
-                                </button>
-                                <button onclick="quickAsk('Calculate OT for public holiday')" class="text-[11px] bg-sage-50 text-sage-800 px-3 py-1.5 rounded-full border border-sage-200 hover:bg-sage-100 transition-all cursor-pointer hidden sm:block">
-                                    OT calculation
-                                </button>
-                            </div>
-                            <form id="chat-form" class="relative" onsubmit="handleUserSubmit(event)">
-                                <input id="chat-input" type="text" placeholder="Ask a complex HR question..." autocomplete="off" class="w-full bg-white border border-sage-200 rounded-xl py-3.5 pl-4 pr-12 text-sm focus:outline-none focus:border-sage-500 focus:ring-2 focus:ring-sage-100 transition-all shadow-sm text-neutral-900 placeholder:text-gray-400">
-                                <button type="submit" class="absolute right-2 top-2 w-9 h-9 bg-sage-900 rounded-lg flex items-center justify-center text-white hover:bg-sage-700 transition-all shadow-md">
-                                    <i class="fa-solid fa-paper-plane text-xs"></i>
-                                </button>
-                            </form>
-                            <div class="mt-2.5 flex items-center justify-center gap-1.5 text-[10px] text-gray-400">
-                                <i class="fa-solid fa-shield-halved text-sage-700"></i>
-                                <span>Your input is processed in a <strong>Zero-Retention Vault</strong>.</span>
-                            </div>
-                        </div>
+
+                        <form id="chat-form" class="relative" onsubmit="handleUserSubmit(event)">
+                            <input id="chat-input" type="text" placeholder="Ask a complex HR question..." autocomplete="off" class="w-full bg-white border border-gray-200 rounded-full py-3.5 pl-6 pr-12 text-sm focus:outline-none focus:border-sage-500 focus:ring-4 focus:ring-sage-100 transition-all shadow-sm text-sage-900 placeholder:text-gray-400">
+                            <button type="submit" class="absolute right-2 top-2 w-9 h-9 bg-sage-900 rounded-full flex items-center justify-center text-white hover:bg-sage-800 transition-all shadow-md">
+                                <i class="fa-solid fa-arrow-up text-xs"></i>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="features" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div class="text-center mb-20">
-            <span class="text-sage-700 font-bold tracking-widest text-xs uppercase mb-3 block">The Compliance Gap</span>
-            <h2 class="font-heading font-bold text-3xl md:text-5xl text-brand-black mb-6">Why "General AI" is a Liability.</h2>
-            <p class="text-lg text-gray-500 max-w-3xl mx-auto leading-relaxed">
-                General LLMs are trained on the open internet, mixing US labor laws with global forums. 
-                <span class="text-neutral-900 font-semibold">HR SAGE is engineered strictly on Malaysian Statutes and Case Law.</span>
-            </p>
-        </div>
-        <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
-            <div class="bg-white rounded-3xl border border-red-100 shadow-xl overflow-hidden group relative">
-                <div class="p-8 lg:p-10 border-b border-gray-100 bg-red-50/30">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center text-red-500 text-xl shadow-sm"><i class="fa-solid fa-triangle-exclamation"></i></div>
-                        <h3 class="font-heading font-bold text-2xl text-gray-800">The "Black Box" Risk</h3>
-                    </div>
-                    <p class="text-gray-600 text-sm">Using public AI tools (ChatGPT, Gemini, Claude) for HR matters exposes your company to three critical failures:</p>
-                </div>
-                <div class="p-8 lg:p-10 space-y-8">
-                     <div class="flex gap-4"><div class="mt-1 flex-shrink-0"><i class="fa-solid fa-earth-americas text-red-400"></i></div><div><h4 class="font-bold text-gray-800 text-sm uppercase tracking-wide mb-1">Jurisdictional Confusion</h4><p class="text-gray-600 text-sm leading-relaxed">General AI often applies US "At-Will Employment" logic. In Malaysia, <strong>Security of Tenure</strong> is guaranteed.</p></div></div>
-                     <div class="flex gap-4"><div class="mt-1 flex-shrink-0"><i class="fa-solid fa-gavel text-red-400"></i></div><div><h4 class="font-bold text-gray-800 text-sm uppercase tracking-wide mb-1">Phantom Case Law</h4><p class="text-gray-600 text-sm leading-relaxed">LLMs are known to invent court cases. They may cite a "2023 Supreme Court Ruling" that never happened.</p></div></div>
-                     <div class="flex gap-4"><div class="mt-1 flex-shrink-0"><i class="fa-solid fa-server text-red-400"></i></div><div><h4 class="font-bold text-gray-800 text-sm uppercase tracking-wide mb-1">PDPA Violations</h4><p class="text-gray-600 text-sm leading-relaxed">Pasting employee salary data or IC numbers into public chatbots violates the <strong>PDPA 2010</strong>.</p></div></div>
-                </div>
+    <section id="features" class="py-24 bg-cream-100 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <span class="text-sage-600 font-bold tracking-widest text-xs uppercase mb-3 block">Compliance Gap</span>
+                <h2 class="font-heading font-bold text-4xl md:text-5xl text-[#1A1A1A] mb-6 tracking-tight">Why HR Sage?</h2>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    General LLMs are trained on the open internet, mixing US labor laws with global forums. 
+                    <strong class="text-sage-900">HR SAGE is engineered strictly on Malaysian Statutes and Case Law.</strong>
+                </p>
             </div>
-            <div class="bg-sage-900 rounded-3xl border border-sage-800 shadow-2xl overflow-hidden group relative text-white transform lg:-translate-y-4 lg:hover:-translate-y-5 transition-transform duration-500">
-                <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-b from-white/10 to-transparent rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none"></div>
-                <div class="relative z-10 p-8 lg:p-10 border-b border-sage-800 bg-sage-800/30 backdrop-blur-md">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="w-12 h-12 bg-sage-100 rounded-xl flex items-center justify-center text-sage-900 text-xl shadow-lg border border-white/20"><i class="fa-solid fa-shield-halved"></i></div>
-                        <h3 class="font-heading font-bold text-2xl text-white">The HR SAGE Standard</h3>
+
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-10 items-stretch">
+                <div class="bg-white rounded-[2.5rem] p-10 border border-gray-200 shadow-sm relative overflow-hidden group hover:shadow-md transition-all flex flex-col">
+                    <div class="mb-8 text-center sm:text-left">
+                        <div class="w-20 h-20 mx-auto sm:mx-0 bg-red-50 rounded-2xl flex items-center justify-center text-accent-red border border-red-100 mb-6">
+                             <i class="fa-solid fa-laptop-code text-3xl"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-2xl text-[#1A1A1A]">The "Black Box" Risk</h3>
+                        <p class="text-sm text-gray-500 mt-3 leading-relaxed">
+                            Using public AI tools (ChatGPT, Gemini, Claude) for HR matters exposes your company to three critical failures:
+                        </p>
                     </div>
-                    <p class="text-sage-200 text-sm">Built specifically for the Malaysian legal framework, combining advanced RAG technology with expert verification.</p>
+
+                    <div class="space-y-6 mt-auto">
+                        <div class="flex gap-4 items-start">
+                            <i class="fa-solid fa-triangle-exclamation text-accent-red mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-[#1A1A1A] text-base mb-1">Jurisdictional Confusion</h4>
+                                <p class="text-gray-600 text-sm">General AI often applies US "At-Will Employment". In Malaysia, <strong>Security of Tenure</strong> is guaranteed.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <i class="fa-solid fa-gavel text-accent-red mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-[#1A1A1A] text-base mb-1">Phantom Case Law</h4>
+                                <p class="text-gray-600 text-sm">LLMs invent court cases. They may cite a "2023 Supreme Court Ruling" that never happened.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <i class="fa-solid fa-user-lock text-accent-red mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-[#1A1A1A] text-base mb-1">PDPA Violations</h4>
+                                <p class="text-gray-600 text-sm">Pasting employee salary data or IC numbers into public chatbots violates the <strong>PDPA 2010</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="relative z-10 p-8 lg:p-10 space-y-8">
-                    <div class="flex gap-4 group/item"><div class="mt-1 flex-shrink-0 w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center border border-green-500/30"><i class="fa-solid fa-scale-balanced text-green-400 text-xs"></i></div><div><h4 class="font-bold text-white text-sm uppercase tracking-wide mb-1 flex items-center gap-2">Statutory Grounding <span class="text-[10px] bg-sage-800 border border-sage-600 px-2 py-0.5 rounded text-sage-200">EA 1955</span></h4><p class="text-sage-200 text-sm leading-relaxed group-hover/item:text-white transition-colors">Hard-coded to prioritize the <strong>Employment Act 1955</strong> and <strong>Industrial Relations Act 1967</strong>.</p></div></div>
-                    <div class="flex gap-4 group/item"><div class="mt-1 flex-shrink-0 w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center border border-green-500/30"><i class="fa-solid fa-file-contract text-green-400 text-xs"></i></div><div><h4 class="font-bold text-white text-sm uppercase tracking-wide mb-1">Verifiable Citations</h4><p class="text-sage-200 text-sm leading-relaxed group-hover/item:text-white transition-colors">We use <strong>RAG</strong> to pull answers directly from a database of 10,000+ Industrial Court Awards.</p></div></div>
-                    <div class="flex gap-4 group/item"><div class="mt-1 flex-shrink-0 w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center border border-green-500/30"><i class="fa-solid fa-lock text-green-400 text-xs"></i></div><div><h4 class="font-bold text-white text-sm uppercase tracking-wide mb-1">Zero-Retention Vault</h4><p class="text-sage-200 text-sm leading-relaxed group-hover/item:text-white transition-colors">Your chat data is processed in an isolated ephemeral environment. It is <strong>never</strong> used to retrain the model.</p></div></div>
+
+                <div class="bg-sage-800 rounded-[2.5rem] p-10 border border-sage-700 shadow-xl relative overflow-hidden text-white flex flex-col">
+                    <div class="mb-8 relative z-10 text-center sm:text-left">
+                        <div class="w-20 h-20 mx-auto sm:mx-0 bg-sage-700 rounded-2xl flex items-center justify-center text-white border border-sage-600 shadow-inner mb-6">
+                             <i class="fa-solid fa-hat-wizard text-3xl"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-2xl text-white">The HR SAGE Standard</h3>
+                        <p class="text-sm text-sage-100 mt-3 leading-relaxed">
+                            Built specifically for the Malaysian legal framework, combining advanced RAG technology with expert verification.
+                        </p>
+                    </div>
+
+                    <div class="space-y-6 mt-auto relative z-10">
+                        <div class="flex gap-4 items-start">
+                             <i class="fa-solid fa-check text-sage-400 mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-white text-base mb-1">Statutory Grounding</h4>
+                                <p class="text-sage-100 text-sm">Hard-coded to prioritize the <strong>Employment Act 1955</strong> and <strong>Industrial Relations Act 1967</strong>.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                             <i class="fa-solid fa-list-check text-sage-400 mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-white text-base mb-1">Verifiable Citations</h4>
+                                <p class="text-sage-100 text-sm">We use RAG to pull answers directly from a database of 10,000+ Industrial Court Awards.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                             <i class="fa-solid fa-shield-halved text-sage-400 mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-white text-base mb-1">Zero-Retention Vault</h4>
+                                <p class="text-sage-100 text-sm">Your chat data is processed in an isolated ephemeral environment. Never used to retrain the model.</p>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
                 </div>
             </div>
         </div>
     </section>
     
-    <section id="learning" class="py-20 bg-neutral-100">
+    <section id="learning" class="py-24 bg-cream-100 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="font-heading font-bold text-3xl md:text-4xl text-brand-black mb-4">More than just a Chatbot.</h2>
-                <p class="text-gray-500 text-lg">Upskill your team with micro-learning modules curated by experts.</p>
-            </div>
-            <div class="grid md:grid-cols-3 gap-6">
-                 <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-md transition-all group cursor-pointer">
-                    <div class="h-48 bg-sage-50 flex items-center justify-center group-hover:bg-sage-100 transition-colors relative overflow-hidden">
-                        <i class="fa-solid fa-gavel text-6xl text-sage-200 absolute -bottom-4 -right-4 transform rotate-12"></i>
-                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm z-10"><i class="fa-solid fa-scale-balanced text-2xl text-sage-700"></i></div>
-                    </div>
-                    <div class="p-6">
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-sage-600 bg-sage-50 px-2 py-1 rounded">Procedure</span>
-                        <h3 class="font-heading font-bold text-lg text-neutral-900 mt-3 mb-2">Domestic Inquiry Guide</h3>
-                        <p class="text-sm text-gray-500 line-clamp-2">Step-by-step protocols for conducting a fair DI to avoid unfair dismissal claims.</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-md transition-all group cursor-pointer">
-                    <div class="h-48 bg-sage-50 flex items-center justify-center group-hover:bg-sage-100 transition-colors relative overflow-hidden">
-                        <i class="fa-solid fa-person-walking-arrow-right text-6xl text-sage-200 absolute -bottom-4 -right-4 transform rotate-12"></i>
-                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm z-10"><i class="fa-solid fa-file-signature text-2xl text-sage-700"></i></div>
-                    </div>
-                    <div class="p-6">
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-sage-600 bg-sage-50 px-2 py-1 rounded">Termination</span>
-                        <h3 class="font-heading font-bold text-lg text-neutral-900 mt-3 mb-2">PIP & Dismissal</h3>
-                        <p class="text-sm text-gray-500 line-clamp-2">How to manage poor performance (PIP) legally before termination.</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-md transition-all group cursor-pointer">
-                    <div class="h-48 bg-sage-50 flex items-center justify-center group-hover:bg-sage-100 transition-colors relative overflow-hidden">
-                        <i class="fa-solid fa-calendar-check text-6xl text-sage-200 absolute -bottom-4 -right-4 transform rotate-12"></i>
-                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm z-10"><i class="fa-regular fa-clock text-2xl text-sage-700"></i></div>
-                    </div>
-                    <div class="p-6">
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-sage-600 bg-sage-50 px-2 py-1 rounded">Benefits</span>
-                        <h3 class="font-heading font-bold text-lg text-neutral-900 mt-3 mb-2">Maternity & Leaves</h3>
-                        <p class="text-sm text-gray-500 line-clamp-2">Understanding the 2023 amendments to maternity leave (98 days) and paternity rights.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="pricing" class="py-24 bg-white relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 relative">
-                <h2 class="font-heading font-bold text-3xl md:text-4xl text-brand-black mb-6">Simple, Transparent Pricing.</h2>
-                
-                <div class="flex items-center justify-center space-x-4 mb-4">
-                    <span id="label-monthly" class="text-neutral-900 font-bold">Monthly</span>
-                    <button id="billing-toggle" class="w-14 h-8 bg-gray-200 rounded-full relative flex items-center px-1 transition-colors focus:outline-none" onclick="toggleBilling()">
-                        <div id="toggle-circle" class="w-6 h-6 bg-white rounded-full shadow-md transform transition-transform duration-300"></div>
-                    </button>
-                    <span id="label-yearly" class="text-gray-500 font-medium">Yearly <span class="text-xs text-sage-700 font-bold ml-1 bg-sage-100 px-1.5 py-0.5 rounded">-20%</span></span>
-                </div>
-                
-                <div class="text-center">
-                     <a href="https://billing.stripe.com/p/login/test_fZu6oGc9R5Mwatx8Fi57W00" class="inline-flex items-center text-sm text-sage-700 hover:text-sage-900 hover:underline">
-                        <i class="fa-solid fa-receipt mr-1.5"></i> Already a subscriber? Manage Billing
-                    </a>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto items-start">
-                <div class="bg-white rounded-2xl p-8 border border-gray-200 hover:border-yellow-400 transition-all hover:shadow-lg relative mt-4 md:mt-0">
-                    <div class="absolute -top-4 -right-2 bg-yellow-400 text-yellow-900 text-xs font-bold px-4 py-1.5 rounded-full shadow-md transform rotate-2">
-                        <i class="fa-solid fa-fire mr-1"></i> MOST POPULAR
-                    </div>
-                    <h3 class="font-heading font-bold text-xl mb-2 text-gray-600">Individual</h3>
-                    <p class="text-sm text-gray-400 mb-4">For freelancers & consultants</p>
-                    <div class="flex items-baseline mb-6">
-                        <span class="text-sm font-bold text-neutral-900 align-top mt-1">RM</span>
-                        <span id="price-ind" class="text-4xl font-bold font-heading text-neutral-900">45</span>
-                        <span class="text-gray-500 ml-2">/ month</span>
-                    </div>
-                    
-                    <button id="btn-ind" onclick="checkout('individual')" class="block w-full py-3 px-4 rounded-lg border-2 border-sage-900 text-sage-900 font-semibold text-center hover:bg-sage-50 transition-colors mb-8">
-                        Start Free Trial
-                    </button>
-                    
-                    <ul class="space-y-4 text-sm text-gray-600">
-                        <li class="flex items-center"><i class="fa-solid fa-check text-sage-700 mr-3"></i> 1 User License</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check text-sage-700 mr-3"></i> Unlimited Chat</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check text-sage-700 mr-3"></i> Basic Citations</li>
-                    </ul>
+            <div class="bg-[#1F1F1F] rounded-[3rem] px-8 py-16 md:p-20 text-center shadow-2xl relative overflow-hidden">
+                <div class="mb-16 relative z-10">
+                    <h2 class="font-heading font-bold text-3xl md:text-5xl text-white mb-4 tracking-tight">More than just a Chatbot</h2>
+                    <p class="text-gray-400 text-lg">Upskill your team with micro-learning modules curated by experts.</p>
                 </div>
 
-                <div class="bg-sage-900 text-white rounded-2xl p-8 border-2 border-sage-800 shadow-2xl relative overflow-hidden group transform md:-translate-y-4">
-                    <div class="absolute top-0 right-0 bg-sage-700 text-white text-xs font-bold px-6 py-2 rounded-bl-xl shadow-inner border-b border-l border-sage-600">
-                        <i class="fa-solid fa-thumbs-up mr-1 text-green-300"></i> BEST VALUE
+                <div class="grid md:grid-cols-3 gap-6 relative z-10">
+                    <div class="rounded-[2rem] overflow-hidden flex flex-col h-full hover:-translate-y-2 transition-transform duration-300 group shadow-lg">
+                        <div class="bg-white h-56 flex items-center justify-center p-6">
+                            <img src="https://placehold.co/300x200/white/black?text=Handshake" class="h-32 object-contain opacity-80 group-hover:scale-105 transition-transform">
+                        </div>
+                        <div class="bg-[#55554F] p-8 flex-1 flex flex-col justify-center items-center">
+                            <h3 class="font-heading font-bold text-lg text-white mb-3">Domestic Inquiry Guide</h3>
+                            <p class="text-gray-300 text-xs leading-relaxed max-w-[200px]">
+                                Step-by-step protocols for conducting a fair DI to avoid unfair dismissal claims.
+                            </p>
+                        </div>
                     </div>
-                    <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-green-500/10 rounded-full blur-2xl group-hover:bg-green-500/20 transition-all"></div>
-                    
-                    <h3 class="font-heading font-bold text-xl mb-2">SME Team</h3>
-                    <p class="text-sm text-sage-200 mb-4">For growing HR departments</p>
-                    <div class="flex items-baseline mb-6">
-                        <span class="text-sm font-bold text-white align-top mt-1">RM</span>
-                        <span id="price-sme" class="text-4xl font-bold font-heading text-white">450</span>
-                        <span class="text-gray-400 ml-2">/ month</span>
-                    </div>
-                    
-                    <button id="btn-sme" onclick="checkout('sme')" class="block w-full py-3 bg-white text-sage-900 font-bold rounded-lg hover:bg-gray-100 transition-colors shadow-lg text-center">
-                        Get Team Access
-                    </button>
-                    
-                    <ul class="mt-6 space-y-4 text-sm text-gray-300">
-                        <li class="flex items-center"><i class="fa-solid fa-check text-green-400 mr-3"></i> <strong>15 User Licenses</strong></li>
-                        <li class="flex items-center"><i class="fa-solid fa-check text-green-400 mr-3"></i> Priority Email Support</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check text-green-400 mr-3"></i> Audit Logs & History</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check text-green-400 mr-3"></i> Export to PDF</li>
-                    </ul>
-                </div>
-            </div>
 
-            <div class="max-w-4xl mx-auto mt-16">
-                <button onclick="toggleComparison()" class="w-full bg-white rounded-2xl shadow-md border border-gray-200 p-6 flex flex-col md:flex-row items-center justify-between hover:shadow-xl hover:border-sage-300 transition-all group relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-r from-sage-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <div class="relative z-10 flex items-center gap-4">
-                        <div class="w-12 h-12 bg-sage-100 rounded-full flex items-center justify-center text-sage-900 group-hover:scale-110 transition-transform"><i class="fa-solid fa-list-check text-xl"></i></div>
-                        <div class="text-left"><span class="block font-heading font-bold text-lg text-neutral-900">Compare Plans & Features</span><span class="text-sm text-gray-500">See the detailed breakdown of what's included</span></div>
+                    <div class="rounded-[2rem] overflow-hidden flex flex-col h-full hover:-translate-y-2 transition-transform duration-300 group shadow-lg">
+                        <div class="bg-white h-56 flex items-center justify-center p-6">
+                            <img src="https://placehold.co/300x200/white/black?text=Checklist" class="h-32 object-contain opacity-80 group-hover:scale-105 transition-transform">
+                        </div>
+                        <div class="bg-[#55554F] p-8 flex-1 flex flex-col justify-center items-center">
+                            <h3 class="font-heading font-bold text-lg text-white mb-3">PIP & Dismissal</h3>
+                            <p class="text-gray-300 text-xs leading-relaxed max-w-[200px]">
+                                How to manage poor performance (PIP) legally before termination.
+                            </p>
+                        </div>
                     </div>
-                    <div class="relative z-10 mt-4 md:mt-0 flex items-center gap-2 text-sage-700 font-bold group-hover:text-sage-900"><span>Show Breakdown</span><i id="chevron-icon" class="fa-solid fa-chevron-down transform transition-transform duration-300"></i></div>
-                </button>
-                <div id="comparison-table" class="max-h-0 transition-max-height duration-500 overflow-hidden mt-4">
-                    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-                        <div class="grid grid-cols-3 gap-4 border-b border-gray-100 p-6 bg-gray-50 text-xs font-bold uppercase tracking-wider text-gray-500 sticky top-0"><div class="col-span-1">Feature</div><div class="text-center">Individual</div><div class="text-center text-sage-900">SME Team</div></div>
-                        <div class="divide-y divide-gray-100">
-                            <div class="grid grid-cols-3 gap-4 items-center p-4 hover:bg-gray-50 transition-colors"><div class="font-medium text-gray-700">User Seats</div><div class="text-center text-gray-600">1</div><div class="text-center font-bold text-sage-900">Up to 15</div></div>
-                            <div class="grid grid-cols-3 gap-4 items-center p-4 hover:bg-gray-50 transition-colors"><div class="font-medium text-gray-700">Legal Citation Engine</div><div class="text-center text-gray-600">Standard</div><div class="text-center font-bold text-sage-900">Advanced + Case Law Links</div></div>
-                            <div class="grid grid-cols-3 gap-4 items-center p-4 hover:bg-gray-50 transition-colors"><div class="font-medium text-gray-700">Data Privacy</div><div class="text-center text-gray-600">Private Vault</div><div class="text-center font-bold text-sage-900">Private Vault + Audit Trail</div></div>
-                            <div class="grid grid-cols-3 gap-4 items-center p-4 hover:bg-gray-50 transition-colors"><div class="font-medium text-gray-700">Support Level</div><div class="text-center text-gray-600">Standard Email</div><div class="text-center font-bold text-sage-900">Priority (2hr response)</div></div>
-                            <div class="grid grid-cols-3 gap-4 items-center p-4 hover:bg-gray-50 transition-colors"><div class="font-medium text-gray-700">Document Export</div><div class="text-center text-gray-400"><i class="fa-solid fa-minus"></i></div><div class="text-center font-bold text-sage-900">PDF & Word</div></div>
-                             <div class="grid grid-cols-3 gap-4 items-center p-4 hover:bg-gray-50 transition-colors"><div class="font-medium text-gray-700">Onboarding</div><div class="text-center text-gray-600">Self-serve</div><div class="text-center font-bold text-sage-900">Dedicated Account Manager</div></div>
-                            <div class="grid grid-cols-3 gap-4 items-center p-6 bg-gray-50">
-                                <div></div>
-                                <div class="text-center"><button onclick="checkout('individual')" class="w-full py-2 px-3 text-sm border border-sage-900 text-sage-900 rounded font-bold hover:bg-sage-50 transition-colors">Choose Individual</button></div>
-                                <div class="text-center"><button onclick="checkout('sme')" class="w-full py-2 px-3 text-sm bg-sage-900 text-white rounded font-bold hover:bg-sage-700 transition-colors shadow-md">Choose SME Team</button></div>
-                            </div>
+
+                    <div class="rounded-[2rem] overflow-hidden flex flex-col h-full hover:-translate-y-2 transition-transform duration-300 group shadow-lg">
+                        <div class="bg-white h-56 flex items-center justify-center p-6">
+                            <img src="https://placehold.co/300x200/white/black?text=Stroller" class="h-32 object-contain opacity-80 group-hover:scale-105 transition-transform">
+                        </div>
+                        <div class="bg-[#55554F] p-8 flex-1 flex flex-col justify-center items-center">
+                            <h3 class="font-heading font-bold text-lg text-white mb-3">Maternity & Leaves</h3>
+                            <p class="text-gray-300 text-xs leading-relaxed max-w-[200px]">
+                                Understanding the 2023 amendments to maternity leave (98 days).
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -385,178 +331,254 @@
         </div>
     </section>
 
-    <footer class="bg-neutral-900 text-gray-300 font-body border-t border-gray-800 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="py-12 border-b border-gray-800 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8">
-                <div>
-                    <h3 class="font-heading font-bold text-2xl text-white mb-2">Stay Compliant.</h3>
-                    <p class="text-gray-300 text-sm max-w-md">Join 4,000+ HR professionals receiving weekly digests on Malaysian Industrial Court Awards.</p>
+   <section id="pricing" class="py-24 bg-cream-100 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col items-center mb-16 text-center">
+                <p class="text-sage-600 text-sm font-medium mb-3">Pricing Plan</p>
+                <h2 class="font-heading font-bold text-4xl md:text-5xl text-[#1A1A1A] mb-6 tracking-tight">Simple, transparent pricing.</h2>
+                
+                <div class="mb-6 text-sm">
+                    <span class="text-gray-500">Already a subscriber?</span>
+                    <a href="https://billing.stripe.com/p/login/test_fZu6oGc9R5Mwatx8Fi57W00" class="text-sage-900 font-bold hover:underline decoration-2 ml-1">Manage billing</a>
                 </div>
-                <div class="w-full lg:w-auto">
-                    <form class="flex flex-col sm:flex-row gap-3">
-                        <input type="email" placeholder="Enter your work email" class="bg-gray-800 text-white border border-gray-700 rounded-lg px-4 py-2.5 focus:outline-none focus:border-sage-700 w-full sm:w-80 transition-colors">
-                        <button class="bg-sage-700 hover:bg-sage-600 text-white font-semibold px-6 py-2.5 rounded-lg transition-all shadow-lg hover:shadow-sage-900/50">Subscribe</button>
+
+                <button onclick="toggleComparison()" class="flex items-center gap-2 text-gray-500 hover:text-sage-900 transition-colors text-sm mb-10 group cursor-pointer">
+                    <span>Compare plans</span>
+                    <i class="fa-solid fa-arrow-down transform group-hover:translate-y-1 transition-transform"></i>
+                </button>
+
+                <div class="bg-cream-300 p-1.5 rounded-full inline-flex items-center gap-1 select-none shadow-inner">
+                    <button id="btn-monthly" onclick="setBilling('monthly')" class="px-8 py-2.5 rounded-full text-sm font-bold bg-white text-sage-900 shadow-sm transition-all border border-gray-100">
+                        Monthly
+                    </button>
+                    <button id="btn-yearly" onclick="setBilling('yearly')" class="px-8 py-2.5 rounded-full text-sm font-medium text-gray-500 hover:text-sage-900 transition-all flex items-center gap-2">
+                        Annually
+                        <span class="bg-sage-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">-20%</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto items-stretch relative z-10">
+                
+                <div class="bg-white rounded-[2.5rem] p-10 border border-gray-100 shadow-card hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col">
+                    <div class="absolute top-8 right-8 z-10">
+                        <span class="bg-accent-gold text-white text-[10px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest">Most Popular</span>
+                    </div>
+                    <div class="h-48 flex items-center justify-center mb-6 mt-2">
+                        <img src="https://placehold.co/300x200/white/1A1A1A?text=Freelancer" class="h-40 object-contain opacity-90 mix-blend-multiply">
+                    </div>
+                    <h3 class="font-heading font-bold text-3xl text-[#1A1A1A] mb-2">Individual</h3>
+                    <p class="text-gray-400 text-sm mb-8">For freelancers & consultants</p>
+                    <div class="flex items-baseline mb-8">
+                        <span class="text-xl font-bold text-[#1A1A1A] align-top mt-1 mr-1">RM</span>
+                        <span id="price-ind" class="text-5xl font-bold font-heading text-[#1A1A1A] tracking-tight">45</span>
+                        <span class="text-gray-300 ml-1 text-lg font-medium">/month</span>
+                    </div>
+                    <button id="btn-ind" onclick="checkout('individual')" class="w-full py-4 rounded-xl bg-accent-beige hover:bg-[#A39885] text-white font-bold transition-all mb-10 shadow-sm tracking-wide">Start Free Trial</button>
+                    <div class="mt-auto space-y-4">
+                        <div class="flex items-center gap-3 text-sm text-gray-600"><i class="fa-regular fa-circle-check text-lg text-sage-600"></i><span>1 user license</span></div>
+                        <div class="flex items-center gap-3 text-sm text-gray-600"><i class="fa-regular fa-circle-check text-lg text-sage-600"></i><span>Unlimited chat</span></div>
+                        <div class="flex items-center gap-3 text-sm text-gray-600"><i class="fa-regular fa-circle-check text-lg text-sage-600"></i><span>Basic citations</span></div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-[2.5rem] p-10 border border-gray-100 shadow-card hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col">
+                    <div class="absolute top-8 right-8 z-10">
+                        <span class="bg-sage-500 text-white text-[10px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest">Best Value</span>
+                    </div>
+                    <div class="h-48 flex items-center justify-center mb-6 mt-2">
+                        <img src="https://placehold.co/300x200/white/1A1A1A?text=Office" class="h-40 object-contain opacity-90 mix-blend-multiply">
+                    </div>
+                    <h3 class="font-heading font-bold text-3xl text-[#1A1A1A] mb-2">SME Team</h3>
+                    <p class="text-gray-400 text-sm mb-8">For growing HR departments</p>
+                    <div class="flex items-baseline mb-8">
+                        <span class="text-xl font-bold text-[#1A1A1A] align-top mt-1 mr-1">RM</span>
+                        <span id="price-sme" class="text-5xl font-bold font-heading text-[#1A1A1A] tracking-tight">450</span>
+                        <span class="text-gray-300 ml-1 text-lg font-medium">/month</span>
+                    </div>
+                    <button id="btn-sme" onclick="checkout('sme')" class="w-full py-4 rounded-xl bg-sage-600 hover:bg-[#5D6F59] text-white font-bold transition-all mb-10 shadow-sm tracking-wide">Get team access</button>
+                    <div class="mt-auto space-y-4">
+                        <div class="flex items-center gap-3 text-sm text-gray-600"><i class="fa-regular fa-circle-check text-lg text-sage-600"></i><span>15 user licenses</span></div>
+                        <div class="flex items-center gap-3 text-sm text-gray-600"><i class="fa-regular fa-circle-check text-lg text-sage-600"></i><span>Priority email support</span></div>
+                        <div class="flex items-center gap-3 text-sm text-gray-600"><i class="fa-regular fa-circle-check text-lg text-sage-600"></i><span>Audit logs & history</span></div>
+                        <div class="flex items-center gap-3 text-sm text-gray-600"><i class="fa-regular fa-circle-check text-lg text-sage-600"></i><span>Export to PDF</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="comparison-table" class="max-w-4xl mx-auto max-h-0 transition-all duration-700 overflow-hidden mt-8 opacity-0">
+                <div class="bg-white rounded-[2rem] shadow-card border border-gray-100 overflow-hidden text-sm p-2">
+                    <div class="grid grid-cols-3 gap-4 p-6 bg-sage-50 rounded-[1.5rem] text-xs font-bold uppercase tracking-wider text-sage-800 mb-2">
+                        <div class="col-span-1 flex items-end pb-2">Feature</div>
+                        <div class="flex flex-col items-center justify-end gap-3 text-center">
+                            <span class="text-sage-900">Individual</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-end gap-3 text-center">
+                            <span class="text-sage-900">SME Team</span>
+                        </div>
+                    </div>
+                    <div class="divide-y divide-gray-100 px-4">
+                        <div class="grid grid-cols-3 gap-4 items-center p-4 hover:bg-gray-50 transition-colors"><div class="font-medium text-sage-900 text-sm">User Seats</div><div class="text-center text-gray-600 text-sm">1</div><div class="text-center font-bold text-sage-900 text-sm">Up to 15</div></div>
+                        <div class="grid grid-cols-3 gap-4 items-center p-4 hover:bg-gray-50 transition-colors"><div class="font-medium text-sage-900 text-sm">Legal Citation Engine</div><div class="text-center text-gray-600 text-sm">Standard</div><div class="text-center font-bold text-sage-900 text-sm">Advanced + Case Law</div></div>
+                        <div class="grid grid-cols-3 gap-4 items-center p-4 hover:bg-gray-50 transition-colors"><div class="font-medium text-sage-900 text-sm">Data Privacy</div><div class="text-center text-gray-600 text-sm">Private Vault</div><div class="text-center font-bold text-sage-900 text-sm">Private Vault + Audit Trail</div></div>
+                        <div class="grid grid-cols-3 gap-4 items-center p-4 hover:bg-gray-50 transition-colors"><div class="font-medium text-sage-900 text-sm">Support Level</div><div class="text-center text-gray-600 text-sm">Standard Email</div><div class="text-center font-bold text-sage-900 text-sm">Priority (2hr response)</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <section class="py-12 px-4 sm:px-6 lg:px-8 bg-cream-100 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="bg-[#1A1A1A] rounded-[3rem] px-8 py-20 text-center shadow-2xl relative overflow-hidden flex flex-col items-center justify-center">
+                <div class="relative z-10 max-w-3xl">
+                    <h2 class="font-heading font-bold text-4xl md:text-6xl text-white mb-10 tracking-tight leading-tight">
+                        Start your <span class="text-sage-500">HR Sage</span> <br>journey today.
+                    </h2>
+                    <button onclick="window.location.href='#pricing'" class="bg-sage-600 text-white font-bold text-lg px-12 py-4 rounded-full shadow-lg hover:bg-[#5D6F59] hover:-translate-y-0.5 transition-all">
+                        Get Started
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-cream-100 text-[#1A1A1A] font-body pt-12 pb-12 border-t border-gray-200/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-20">
+                <div class="lg:col-span-4 space-y-6">
+                    <div class="flex items-center gap-2 mb-6">
+                        <div class="text-sage-900"><i class="fa-solid fa-scale-balanced text-2xl"></i></div>
+                        <span class="font-heading font-bold text-2xl tracking-tight text-[#1A1A1A]">HR Sage</span>
+                    </div>
+                    <div class="space-y-4 text-sm text-gray-600">
+                        <p><a href="mailto:support@hrsage.my" class="hover:text-sage-900 transition-colors">support@hrsage.my</a></p>
+                        <p>+60 10-568 0715</p>
+                        <p class="leading-relaxed max-w-xs text-gray-500">
+                            22-06, Menara Mutiara Sentral,<br>
+                            2, Jalan Desa Aman 1, Cheras Business Centre,<br>
+                            56000 Cheras, Federal Territory of Kuala Lumpur.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 lg:col-start-6">
+                    <h4 class="font-bold text-[#1A1A1A] mb-6 text-sm uppercase tracking-wide">Product</h4>
+                    <ul class="space-y-4 text-sm text-gray-600">
+                        <li><a href="#features" class="hover:text-sage-900 transition-colors">Features</a></li>
+                        <li><a href="#pricing" class="hover:text-sage-900 transition-colors">Pricing</a></li>
+                        <li><a href="#" class="hover:text-sage-900 transition-colors">Case Law Database</a></li>
+                        <li><a href="#" class="hover:text-sage-900 transition-colors">Changelog</a></li>
+                        <li><a href="#" class="hover:text-sage-900 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-2">
+                    <h4 class="font-bold text-[#1A1A1A] mb-6 text-sm uppercase tracking-wide">Resources</h4>
+                    <ul class="space-y-4 text-sm text-gray-600">
+                        <li><a href="#learning" class="hover:text-sage-900 transition-colors">Learning Hub</a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <h4 class="font-bold text-[#1A1A1A] mb-4 text-sm uppercase tracking-wide">Stay Compliant</h4>
+                    <p class="text-sm text-gray-500 leading-relaxed mb-6">
+                        Join 4,000+ HR professionals receiving weekly digests on Malaysian Industrial Court Awards.
+                    </p>
+                    <form class="flex items-center gap-2">
+                        <input type="email" placeholder="Enter your email" class="bg-gray-200/50 text-sage-900 placeholder:text-gray-500 rounded-full px-4 py-2.5 w-full text-sm focus:outline-none focus:ring-2 focus:ring-sage-400 border-0">
+                        <button type="submit" class="bg-white text-[#1A1A1A] font-bold text-sm px-5 py-2.5 rounded-full shadow-sm border border-gray-200 hover:bg-gray-50 transition-all">Subscribe</button>
                     </form>
                 </div>
             </div>
-            <div class="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
-                <div class="lg:col-span-2 space-y-6">
-                    <div class="flex items-center gap-2">
-                        <div class="w-6 h-6 bg-sage-700 rounded flex items-center justify-center text-white"><i class="fa-solid fa-scale-balanced text-xs"></i></div>
-                        <span class="font-heading font-bold text-xl text-white tracking-tight">HR SAGE</span>
-                    </div>
-                    <p class="text-sm leading-relaxed text-gray-300 max-w-sm">The AI-powered legal companion for modern Malaysian businesses.</p>
-                    <div class="space-y-3 text-sm pt-4">
-                        <div class="flex items-start gap-3"><i class="fa-solid fa-location-dot mt-1 text-sage-700"></i><span>Scrum HR Group Sdn Bhd (1354587V / 201901045257)<br>22-06, Menara Mutiara Sentral, 2, Jalan Desa Aman 1,<br>Cheras Business Centre, 56000 Cheras,<br>Federal Territory of Kuala Lumpur</span></div>
-                        <div class="flex items-center gap-3"><i class="fa-solid fa-envelope text-sage-700"></i><a href="mailto:support@hrsage.ai" class="hover:text-white transition-colors">support@hrsage.ai</a></div>
-                    </div>
+
+            <div class="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-4 opacity-60 hover:opacity-100 transition-opacity order-2 md:order-1">
+                    <div class="flex items-center gap-2 text-xs text-gray-500" title="Hosted on AWS"><i class="fa-brands fa-aws text-2xl"></i></div>
+                    <div class="h-4 w-px bg-gray-300"></div>
+                    <div class="flex items-center gap-2 text-xs text-gray-500" title="SOC2 Compliant"><i class="fa-solid fa-shield-halved text-lg"></i><span class="font-semibold">SOC2</span></div>
                 </div>
-                <div>
-                    <h4 class="font-bold text-white mb-6">Product</h4>
-                    <ul class="space-y-4 text-sm">
-                        <li><a href="#" class="hover:text-sage-100 transition-colors">Features</a></li>
-                        <li><a href="#" class="hover:text-sage-100 transition-colors">Pricing</a></li>
-                        <li><a href="#" class="hover:text-sage-100 transition-colors">Case Law Database</a></li>
-                        <li><a href="#" class="hover:text-sage-100 transition-colors flex items-center gap-2"><span>Changelog</span><span class="text-[10px] bg-gray-800 px-1.5 py-0.5 rounded border border-gray-700 text-gray-300">v2.4</span></a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-white mb-6">Resources</h4>
-                    <ul class="space-y-4 text-sm">
-                        <li><a href="#" class="hover:text-sage-100 transition-colors">Learning Hub</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-white mb-6">Compliance</h4>
-                    <ul class="space-y-4 text-sm">
-                        <li><a href="#" class="hover:text-sage-100 transition-colors">Privacy Policy</a></li>
-                        <li><a href="#" class="hover:text-sage-100 transition-colors">Terms of Service</a></li>
-                        <li><a href="security_overview.html" class="hover:text-sage-100 transition-colors">Security Overview</a></li>
-                        <li><a href="#" class="text-green-500 hover:text-green-400 transition-colors flex items-center gap-2 mt-4"><div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>System Operational</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 py-8 flex flex-col md:flex-row justify-between items-center text-sm">
-                <p>&copy; 2025 Scrum HR Group Sdn Bhd (1354587V / 201901045257).</p>
-                <div class="flex items-center gap-6 mt-4 md:mt-0">
-                    <div class="flex items-center gap-4 border-r border-gray-700 pr-6 mr-2 opacity-60 grayscale hover:grayscale-0 transition-all">
-                        <i class="fa-brands fa-aws text-xl" title="Hosted on AWS"></i>
-                        <i class="fa-solid fa-shield-halved text-lg" title="SOC2 Compliant"></i>
-                    </div>
-                    <a href="#" class="text-gray-300 hover:text-white transition-colors"><i class="fa-brands fa-linkedin text-lg"></i></a>
-                    <a href="#" class="text-gray-300 hover:text-white transition-colors"><i class="fa-brands fa-twitter text-lg"></i></a>
+                <p class="text-gray-400 text-[10px] order-1 md:order-2">&copy; 2025 Scrum HR Group Sdn Bhd. (Reg: 1354587V / 201901045257)</p>
+                <div class="flex items-center gap-4 order-3">
+                    <a href="#" class="text-gray-400 hover:text-[#0077b5] transition-colors"><i class="fa-brands fa-linkedin text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-black transition-colors"><i class="fa-brands fa-x-twitter text-xl"></i></a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // --- STRIPE CONFIGURATION ---
-        
-        let stripe; 
-        let STRIPE_PRICES = null; // Loaded dynamically
-
-        // 1. Fetch Configuration from Netlify
-        async function initializeStripe() {
-            try {
-                const response = await fetch('/.netlify/functions/get-config');
-                const data = await response.json();
-                
-                // Optional: Handle Maintenance Mode
-                if (data.maintenanceMode) {
-                    disablePayments();
-                    return;
-                }
-
-                // Initialize Stripe Key
-                if (data.publishableKey) {
-                    stripe = Stripe(data.publishableKey);
-                } else {
-                    console.error("Stripe Publishable Key not found in config.");
-                }
-                
-                // Initialize Prices
-                if (data.prices) {
-                    STRIPE_PRICES = data.prices;
-                    console.log("Configuration loaded.");
-                }
-            } catch (err) {
-                console.error("Failed to load Stripe config:", err);
-            }
+        // --- MOBILE MENU ---
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        if(menuBtn) {
+            menuBtn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
         }
-        
-        // Run immediately
-        initializeStripe();
 
-        // 2. Billing Toggle Logic
-        let isYearlyBilling = false; 
-
-        function toggleBilling() {
-            isYearlyBilling = !isYearlyBilling;
-            const toggleCircle = document.getElementById('toggle-circle');
-            const toggleBtn = document.getElementById('billing-toggle');
+        // --- PRICING LOGIC ---
+        let isYearly = false;
+        function setBilling(plan) {
+            const btnMonthly = document.getElementById('btn-monthly');
+            const btnYearly = document.getElementById('btn-yearly');
             const priceInd = document.getElementById('price-ind');
             const priceSme = document.getElementById('price-sme');
-            const labelMonthly = document.getElementById('label-monthly');
-            const labelYearly = document.getElementById('label-yearly');
-
-            if (isYearlyBilling) {
-                toggleCircle.classList.add('translate-x-6');
-                toggleBtn.classList.replace('bg-gray-200', 'bg-sage-900');
-                labelMonthly.classList.replace('text-neutral-900', 'text-gray-500');
-                labelMonthly.classList.remove('font-bold');
-                labelYearly.classList.replace('text-gray-500', 'text-sage-900');
-                labelYearly.classList.replace('font-medium', 'font-extrabold');
-                
+            
+            if (plan === 'yearly') {
+                isYearly = true;
+                btnMonthly.className = "px-8 py-2.5 rounded-full text-sm font-medium text-gray-500 hover:text-sage-900 transition-all bg-transparent";
+                btnYearly.className = "px-8 py-2.5 rounded-full text-sm font-bold bg-white text-sage-900 shadow-sm transition-all flex items-center gap-2";
                 priceInd.textContent = '36';
                 priceSme.textContent = '360';
             } else {
-                toggleCircle.classList.remove('translate-x-6');
-                toggleBtn.classList.replace('bg-sage-900', 'bg-gray-200');
-                labelMonthly.classList.replace('text-gray-500', 'text-neutral-900');
-                labelMonthly.classList.add('font-bold');
-                labelYearly.classList.replace('text-sage-900', 'text-gray-500');
-                labelYearly.classList.replace('font-extrabold', 'font-medium');
-                
+                isYearly = false;
+                btnMonthly.className = "px-8 py-2.5 rounded-full text-sm font-bold bg-white text-sage-900 shadow-sm transition-all border border-gray-100";
+                btnYearly.className = "px-8 py-2.5 rounded-full text-sm font-medium text-gray-500 hover:text-sage-900 transition-all flex items-center gap-2 bg-transparent";
                 priceInd.textContent = '45';
                 priceSme.textContent = '450';
             }
         }
+        
+        function toggleComparison() {
+            const table = document.getElementById('comparison-table');
+            if (table.classList.contains('max-h-0')) {
+                table.classList.remove('max-h-0', 'opacity-0');
+                table.classList.add('max-h-[1000px]', 'opacity-100');
+                setTimeout(() => { table.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 100);
+            } else {
+                table.classList.add('max-h-0', 'opacity-0');
+                table.classList.remove('max-h-[1000px]', 'opacity-100');
+            }
+        }
 
-        // 3. Checkout Logic
+        // --- STRIPE ---
+        let stripe; 
+        let STRIPE_PRICES = null;
+        async function initializeStripe() {
+            try {
+                const response = await fetch('/.netlify/functions/get-config');
+                const data = await response.json();
+                if (data.publishableKey) stripe = Stripe(data.publishableKey);
+                if (data.prices) STRIPE_PRICES = data.prices;
+            } catch (err) { console.error("Stripe config error:", err); }
+        }
+        initializeStripe();
+
         async function checkout(planType) {
-            // Safety Check: Wait for config
             if (!stripe || !STRIPE_PRICES) {
-                const btnId = planType === 'individual' ? 'btn-ind' : 'btn-sme';
-                const btn = document.getElementById(btnId);
-                const originalText = btn.innerText;
-                
-                btn.innerText = 'Connecting...';
-                await initializeStripe(); // Retry loading
-                
-                if(!stripe || !STRIPE_PRICES) {
-                    alert("Payment system is initializing. Please try again in a few seconds.");
-                    btn.innerText = originalText;
-                    return;
-                }
-                btn.innerText = originalText; // Reset text
+                await initializeStripe();
+                if(!stripe) return alert("Payment system initializing...");
             }
-
-            const frequency = isYearlyBilling ? 'yearly' : 'monthly';
+            const frequency = isYearly ? 'yearly' : 'monthly';
             const priceId = STRIPE_PRICES[frequency][planType];
-
-            // UI Feedback
-            const btnId = planType === 'individual' ? 'btn-ind' : 'btn-sme';
-            const btn = document.getElementById(btnId) || document.querySelector(`button[onclick="checkout('${planType}')"]`); 
             
-            let originalText = "";
-            if(btn) {
-                originalText = btn.innerText;
-                btn.innerText = 'Processing...';
-                btn.disabled = true;
-                btn.classList.add('opacity-75', 'cursor-not-allowed');
-            }
+            // Basic UI Feedback
+            const btn = document.activeElement;
+            const originalText = btn.innerText;
+            btn.innerText = 'Processing...';
+            btn.disabled = true;
 
             try {
                 const response = await fetch('/.netlify/functions/create-checkout', {
@@ -564,113 +586,38 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ priceId: priceId }),
                 });
-
                 const session = await response.json();
-
-                if (session.error) {
-                    alert("Error: " + session.error);
-                    return;
-                }
-
-                const result = await stripe.redirectToCheckout({
-                    sessionId: session.sessionId,
-                });
-
-                if (result.error) {
-                    alert(result.error.message);
-                }
+                if (session.error) alert(session.error);
+                else await stripe.redirectToCheckout({ sessionId: session.sessionId });
             } catch (err) {
-                console.error('Error:', err);
-                alert('Connection failed. Please check your internet or try again.');
+                alert('Connection failed.');
             } finally {
-                if(btn) {
-                    btn.innerText = originalText;
-                    btn.disabled = false;
-                    btn.classList.remove('opacity-75', 'cursor-not-allowed');
-                }
+                btn.innerText = originalText;
+                btn.disabled = false;
             }
         }
-        
-        function disablePayments() {
-            const buttons = document.querySelectorAll('button[id^="btn-"]');
-            buttons.forEach(btn => {
-                btn.disabled = true;
-                btn.innerText = "Maintenance";
-                btn.classList.add('opacity-50', 'cursor-not-allowed');
-            });
-        }
 
-        // --- CHAT SIMULATION LOGIC (Preserved) ---
+        // --- CHAT SIMULATION ---
         const chatDisplay = document.getElementById('chat-display');
         const chatInput = document.getElementById('chat-input');
-        
         let isAnimating = false;
         let userHasInteracted = false;
         let animationTimeouts = [];
 
-        const introSequence = [
-            { type: 'user', text: "What is the procedure for domestic inquiry?" },
-            { type: 'think', duration: 1500 },
-            { type: 'ai', text: "Based on the Malaysian Employment Act 1955, a Domestic Inquiry (DI) must follow strict procedural fairness. <br><br><b>Key Steps:</b><br>1. Issue a specific Show Cause Letter.<br>2. Appoint an independent panel (non-biased).<br>3. Allow the employee to bring a witness (union rep)." }
-        ];
-
-        function stopSimulation() {
-            if (userHasInteracted) return;
-            userHasInteracted = true;
-            animationTimeouts.forEach(clearTimeout);
-            isAnimating = false;
-            const cursors = document.querySelectorAll('.typing-cursor');
-            cursors.forEach(c => c.classList.remove('typing-cursor'));
-        }
-
-        if(chatInput) {
-            chatInput.addEventListener('focus', stopSimulation);
-        }
-
-        function quickAsk(question) {
-            stopSimulation();
-            chatInput.value = question;
-            handleUserSubmit(new Event('submit'));
-        }
-
         function createMessageElement(type, content = '') {
             const wrapper = document.createElement('div');
             wrapper.className = `flex w-full ${type === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in`;
-            
             const bubble = document.createElement('div');
+            
             if (type === 'user') {
                 bubble.className = "bg-sage-900 text-white rounded-2xl rounded-tr-sm px-4 py-3 max-w-[85%] text-sm shadow-md";
                 bubble.innerHTML = content;
             } else if (type === 'ai') {
-                bubble.className = "bg-sage-50 text-neutral-900 rounded-2xl rounded-tl-sm px-5 py-4 max-w-[92%] text-sm shadow-sm border border-sage-100 relative";
-                const header = `<div class="flex items-center gap-2 mb-2 border-b border-sage-200 pb-2"><i class="fa-solid fa-scale-balanced text-sage-700 text-xs"></i><span class="text-[10px] font-bold text-sage-800 uppercase tracking-wider">Legal Analysis</span></div>`;
-                bubble.innerHTML = header + '<div class="typing-content leading-relaxed"></div>';
-            } else if (type === 'gatekeeper') {
-                bubble.className = "bg-white text-neutral-900 rounded-2xl rounded-tl-sm w-full max-w-[92%] text-sm shadow-lg border border-sage-200 overflow-hidden relative";
-                bubble.innerHTML = `
-                    <div class="px-5 py-4 bg-sage-50/50">
-                        <div class="flex items-center gap-2 mb-2"><i class="fa-solid fa-check-circle text-green-600"></i><span class="font-bold text-sage-900">Summary Answer</span></div>
-                        <p class="text-gray-700 mb-3">${content.summary}</p>
-                    </div>
-                    <div class="px-5 py-4 relative">
-                        <div class="flex items-center gap-2 mb-2"><i class="fa-solid fa-book text-sage-700"></i><span class="font-bold text-sage-900">Case Law Citations</span></div>
-                        <div class="blur-lock text-gray-400 text-xs space-y-2">
-                            <p>As per Industrial Court Award No. 1293 of 2019...</p>
-                            <p>Referencing Section 14(1) of the EA 1955 regarding misconduct...</p>
-                            <p>Precedent set in <em>Malan v. Company X</em> (2021)...</p>
-                        </div>
-                        
-                        <div class="absolute inset-0 bg-white/60 backdrop-blur-[1px] flex flex-col items-center justify-center text-center p-4">
-                            <p class="text-sage-900 font-bold mb-2 text-sm">Verify this with real Case Laws</p>
-                            <button onclick="window.location.href='#pricing'" class="bg-sage-900 hover:bg-sage-700 text-white text-xs font-bold py-2 px-4 rounded-lg shadow-lg transition-all flex items-center gap-2">
-                                <i class="fa-solid fa-lock-open"></i> Unlock Citations (Free Trial)
-                            </button>
-                        </div>
-                    </div>
-                `;
+                bubble.className = "bg-sage-100 text-[#1A1A1A] rounded-2xl rounded-tl-sm px-5 py-4 max-w-[92%] text-sm shadow-sm border border-sage-200 relative";
+                bubble.innerHTML = `<div class="flex items-center gap-2 mb-2 border-b border-sage-200 pb-2"><i class="fa-solid fa-scale-balanced text-sage-700 text-xs"></i><span class="text-[10px] font-bold text-sage-800 uppercase tracking-wider">Legal Analysis</span></div><div class="typing-content leading-relaxed"></div>`;
             } else if (type === 'think') {
                 bubble.className = "bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm border border-gray-100 flex space-x-1 items-center h-10 w-fit";
-                bubble.innerHTML = `<div class="w-1.5 h-1.5 bg-sage-400 rounded-full animate-bounce"></div><div class="w-1.5 h-1.5 bg-sage-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div><div class="w-1.5 h-1.5 bg-sage-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div><span class="text-xs text-gray-400 ml-2">Reviewing Statutes...</span>`;
+                bubble.innerHTML = `<div class="w-1.5 h-1.5 bg-sage-400 rounded-full animate-bounce"></div><div class="w-1.5 h-1.5 bg-sage-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div><div class="w-1.5 h-1.5 bg-sage-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>`;
             }
             wrapper.appendChild(bubble);
             return { wrapper, bubble };
@@ -678,7 +625,6 @@
 
         async function typeWriter(element, text, speed = 15) {
             let i = 0;
-            element.innerHTML = '';
             return new Promise(resolve => {
                 function type() {
                     if (i < text.length) {
@@ -690,13 +636,10 @@
                             element.innerHTML += text.charAt(i);
                             i++;
                         }
-                        if(chatDisplay) chatDisplay.scrollTop = chatDisplay.scrollHeight;
+                        chatDisplay.scrollTop = chatDisplay.scrollHeight;
                         setTimeout(type, speed);
                     } else {
-                        const badge = document.createElement('div');
-                        badge.className = "flex items-center mt-3 text-xs text-green-700 font-bold bg-green-50 w-fit px-2 py-1 rounded border border-green-100 animate-pulse";
-                        badge.innerHTML = '<i class="fa-solid fa-check-circle mr-1"></i> Verified against Industrial Court Awards';
-                        element.appendChild(badge);
+                        element.innerHTML += '<div class="flex items-center mt-3 text-xs text-green-700 font-bold bg-green-50 w-fit px-2 py-1 rounded border border-green-100"><i class="fa-solid fa-check-circle mr-1"></i> Verified</div>';
                         resolve();
                     }
                 }
@@ -705,91 +648,72 @@
         }
 
         async function runChatSimulation() {
-            if(isAnimating || userHasInteracted || !chatDisplay) return;
+            if(isAnimating || userHasInteracted) return;
             isAnimating = true;
-            chatDisplay.innerHTML = '';
-
-            const wait = (ms) => new Promise(r => {
-                const id = setTimeout(r, ms);
-                animationTimeouts.push(id);
-            });
-
+            
+            const wait = (ms) => new Promise(r => animationTimeouts.push(setTimeout(r, ms)));
+            
             await wait(800);
             if(userHasInteracted) return;
-            const userMsg = createMessageElement('user', introSequence[0].text);
+            const userMsg = createMessageElement('user', "What is the procedure for domestic inquiry?");
             chatDisplay.appendChild(userMsg.wrapper);
             
-            await wait(1000);
+            await wait(800);
             if(userHasInteracted) return;
             const thinkMsg = createMessageElement('think');
             chatDisplay.appendChild(thinkMsg.wrapper);
             chatDisplay.scrollTop = chatDisplay.scrollHeight;
             
-            await wait(introSequence[1].duration);
-            if(userHasInteracted) { if(thinkMsg.wrapper.parentNode) chatDisplay.removeChild(thinkMsg.wrapper); return; }
+            await wait(1500);
+            if(userHasInteracted) return;
             chatDisplay.removeChild(thinkMsg.wrapper);
 
             const aiMsg = createMessageElement('ai');
             chatDisplay.appendChild(aiMsg.wrapper);
-            const contentArea = aiMsg.bubble.querySelector('.typing-content');
-            contentArea.classList.add('typing-cursor');
+            const content = aiMsg.bubble.querySelector('.typing-content');
+            content.classList.add('typing-cursor');
             
-            await typeWriter(contentArea, introSequence[2].text);
-            contentArea.classList.remove('typing-cursor');
-            
-            isAnimating = false;
+            await typeWriter(content, "Based on the Employment Act 1955, a Domestic Inquiry (DI) must follow strict procedural fairness:<br><br>1. Issue Show Cause Letter.<br>2. Appoint independent panel.<br>3. Allow employee representation.");
+            content.classList.remove('typing-cursor');
+        }
+
+        function stopSimulation() {
+            if(userHasInteracted) return;
+            userHasInteracted = true;
+            animationTimeouts.forEach(clearTimeout);
+            chatDisplay.innerHTML = ''; 
+        }
+
+        function quickAsk(q) {
+            stopSimulation();
+            chatInput.value = q;
+            handleUserSubmit(new Event('submit'));
         }
 
         async function handleUserSubmit(e) {
             e.preventDefault();
             stopSimulation();
+            const val = chatInput.value.trim();
+            if(!val) return;
             
-            const question = chatInput.value.trim();
-            if(!question) return;
-
-            const userMsg = createMessageElement('user', question);
-            chatDisplay.appendChild(userMsg.wrapper);
+            chatDisplay.appendChild(createMessageElement('user', val).wrapper);
             chatInput.value = '';
-            chatDisplay.scrollTop = chatDisplay.scrollHeight;
-
-            const thinkMsg = createMessageElement('think');
-            chatDisplay.appendChild(thinkMsg.wrapper);
-            chatDisplay.scrollTop = chatDisplay.scrollHeight;
-
-            await new Promise(r => setTimeout(r, 1500));
-            chatDisplay.removeChild(thinkMsg.wrapper);
-
-            const gatekeeperMsg = createMessageElement('gatekeeper', {
-                summary: `Based on the <b>Employment Act 1955</b>, this requires a specific procedural adherence. You must issue a show cause letter and allow 7 days for a reply before taking action.`,
-            });
-            chatDisplay.appendChild(gatekeeperMsg.wrapper);
-            chatDisplay.scrollTop = chatDisplay.scrollHeight;
-        }
-
-        function toggleComparison() {
-            const table = document.getElementById('comparison-table');
-            const icon = document.getElementById('chevron-icon');
             
-            if (table.classList.contains('max-h-0')) {
-                table.classList.remove('max-h-0');
-                table.classList.add('max-h-screen');
-                icon.classList.add('rotate-180');
-            } else {
-                table.classList.add('max-h-0');
-                table.classList.remove('max-h-screen');
-                icon.classList.remove('rotate-180');
-            }
-        }
-
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
-        if(menuBtn) {
-            menuBtn.addEventListener('click', () => {
-                menu.classList.toggle('hidden');
-            });
+            const think = createMessageElement('think');
+            chatDisplay.appendChild(think.wrapper);
+            chatDisplay.scrollTop = chatDisplay.scrollHeight;
+            
+            await new Promise(r => setTimeout(r, 1500));
+            chatDisplay.removeChild(think.wrapper);
+            
+            const ai = createMessageElement('ai');
+            chatDisplay.appendChild(ai.wrapper);
+            const content = ai.bubble.querySelector('.typing-content');
+            content.innerHTML = "Based on the <b>Employment Act 1955</b>, this requires specific procedural adherence. Check Section 14(1) regarding misconduct.";
         }
 
         window.addEventListener('load', runChatSimulation);
+        if(chatInput) chatInput.addEventListener('focus', stopSimulation);
     </script>
 </body>
 </html>
