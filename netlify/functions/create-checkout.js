@@ -5,7 +5,8 @@ exports.handler = async (event) => {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
-  const { priceId } = JSON.parse(event.body);
+  // 1. Extract 'frequency' along with price and plan
+  const { priceId, planType, frequency } = JSON.parse(event.body);
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -17,7 +18,11 @@ exports.handler = async (event) => {
           quantity: 1,
         },
       ],
-      // UPDATED: Using APP_URL instead of URL
+      // 2. Add it to metadata
+      metadata: {
+        product_type: planType || 'unknown',  // 'individual' or 'sme'
+        billing_cycle: frequency || 'monthly' // 'monthly' or 'yearly'
+      },
       success_url: `${process.env.APP_URL}/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.APP_URL}/cancel.html`,
     });
