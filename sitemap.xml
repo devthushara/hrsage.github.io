@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+                            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd
+                            http://www.google.com/schemas/sitemap-image/1.1
+                            http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd">
+
+    <!-- Homepage -->
+    <url>
+        <loc>https://hrsage.ai/</loc>
+        <lastmod>2026-01-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://hrsage.ai/img/hr-sage-dark.svg</image:loc>
+            <image:title>HR Sage Logo</image:title>
+        </image:image>
+    </url>
+
+    <!-- Privacy Policy -->
+    <url>
+        <loc>https://hrsage.ai/privacy.html</loc>
+        <lastmod>2026-01-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- Terms and Conditions -->
+    <url>
+        <loc>https://hrsage.ai/tnc.html</loc>
+        <lastmod>2026-01-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- Security Overview -->
+    <url>
+        <loc>https://hrsage.ai/security_overview.html</loc>
+        <lastmod>2026-01-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Success Page -->
+    <url>
+        <loc>https://hrsage.ai/success.html</loc>
+        <lastmod>2026-01-05</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+    <!-- Cancel Page -->
+    <url>
+        <loc>https://hrsage.ai/cancel.html</loc>
+        <lastmod>2026-01-05</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+</urlset>

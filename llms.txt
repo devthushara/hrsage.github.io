@@ -1,0 +1,60 @@
+# HR SAGE - Expert-Verified HR Companion for Malaysia
+# llms.txt - Information for LLM Crawlers
+
+## About HR Sage
+HR Sage is an expert-verified HR companion specifically designed for Malaysia. It provides instant, cited answers derived strictly from the Employment Act 1955 and Industrial Court Awards.
+
+## Product Description
+HR Sage is a specialized AI-powered platform that helps Malaysian businesses and HR professionals navigate complex employment law and industrial relations. Our system provides accurate, legally-grounded answers backed by official legislation and court precedents.
+
+## Key Features
+- Expert-verified HR guidance for Malaysian businesses
+- Instant answers from Employment Act 1955
+- Industrial Court Awards citations and references
+- Private and secure document handling
+- Real-time legal compliance assistance
+- Subscription-based access with flexible pricing
+
+## Target Audience
+- HR Professionals in Malaysia
+- Business owners and managers
+- Legal professionals dealing with employment law
+- Companies seeking compliance with Malaysian labor laws
+
+## Technology Stack
+- AI-powered question answering system
+- Stripe payment integration
+- Netlify serverless functions
+- Secure document vault
+
+## Legal Compliance
+All information provided is derived from:
+- Employment Act 1955 (Malaysia)
+- Malaysian Industrial Court Awards
+- Official government publications and legal documents
+
+## Contact & Resources
+Website: http://hrsage.ai
+Services: HR consultation, legal compliance, industrial relations guidance
+
+## Pricing
+We offer subscription plans for different business sizes:
+- Individual plans for small businesses
+- Team plans for growing organizations
+- Enterprise solutions for large corporations
+
+## Privacy & Security
+- End-to-end encryption for sensitive documents
+- Compliance with Malaysian data protection regulations
+- Private vault for confidential HR materials
+- Secure payment processing via Stripe
+
+## Pages Available
+- Homepage: Main product information and features
+- Pricing: Subscription plans and pricing details
+- Privacy Policy: Data handling and privacy practices
+- Terms & Conditions: Service agreements
+- Security Overview: Security measures and compliance
+
+## Keywords
+Malaysian HR, Employment Act 1955, Industrial Court Awards, HR compliance Malaysia, labor law Malaysia, employment law Malaysia, HR assistant, legal HR guidance, workplace compliance

@@ -1,0 +1,32 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+    Project -- HR Sage Team
+    Site -- https://hrsage.ai
+    Contact -- support [at] hrsage.com
+    Location -- Malaysia
+
+# THANKS
+    To all Malaysian HR professionals and legal experts
+    Employment Act 1955 contributors
+    Industrial Court of Malaysia
+
+# TECHNOLOGY COLOPHON
+
+    Standards -- HTML5, CSS3
+    Components -- Tailwind CSS, Font Awesome
+    Fonts -- Poppins, Karla (Google Fonts)
+    JavaScript -- Vanilla JS, Stripe.js
+    Hosting -- GitHub Pages
+    Backend -- Netlify Functions
+    Payment Processing -- Stripe
+    IDE -- VS Code
+    
+# SITE
+
+    Last update -- 2026/01/05
+    Language -- English
+    Doctype -- HTML5
+    Primary Markets -- Malaysia
+    Standards Compliance -- WCAG 2.1 AA
