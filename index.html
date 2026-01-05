@@ -55,6 +55,7 @@
                     'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     'blink': 'blink 1s step-end infinite',
                     'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    'fade-in': 'fadeIn 0.3s ease-out forwards',
                     'marquee': 'marquee 40s linear infinite', // Smooth levitating scroll
                 },
                 keyframes: {
@@ -65,6 +66,10 @@
                     fadeInUp: {
                         '0%': { opacity: '0', transform: 'translateY(20px)' },
                         '100%': { opacity: '1', transform: 'translateY(0)' },
+                    },
+                    fadeIn: {
+                        '0%': { opacity: '0' },
+                        '100%': { opacity: '1' },
                     },
                     blink: {
                         '0%, 100%': { opacity: '1' },
@@ -706,6 +711,29 @@
         </div>
     </footer>
 
+    <!-- Terms & Privacy Modal -->
+    <div id="terms-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full mx-4 overflow-hidden animate-fade-in-up">
+            <div class="bg-gradient-to-br from-sage-900 via-sage-800 to-sage-900 px-6 py-5 text-center">
+                <i class="fa-solid fa-file-contract text-sage-100 text-3xl mb-3"></i>
+                <h3 class="font-heading font-bold text-xl text-white">Terms & Conditions</h3>
+            </div>
+            <div class="px-6 py-6">
+                <p class="text-gray-700 leading-relaxed mb-5 text-sm">
+                    By proceeding to the payment gateway, you acknowledge that you have read and agree to our <a href="privacy.html" target="_blank" rel="noopener noreferrer" class="text-sage-700 font-bold underline hover:text-sage-900">Privacy Policy</a> and <a href="tnc.html" target="_blank" rel="noopener noreferrer" class="text-sage-700 font-bold underline hover:text-sage-900">Terms of Use</a>.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <button onclick="closeTermsModal()" class="flex-1 px-6 py-3 rounded-xl border-2 border-gray-300 text-gray-700 font-bold hover:bg-gray-50 transition-all">
+                        Cancel
+                    </button>
+                    <button onclick="acceptTermsAndProceed()" class="flex-1 px-6 py-3 rounded-xl bg-sage-btn hover:bg-opacity-90 text-white font-bold transition-all shadow-lg">
+                        I Agree, Proceed
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // --- MOBILE MENU ---
         const menuBtn = document.getElementById('mobile-menu-btn');
@@ -780,7 +808,42 @@
         }
         initializeStripe();
 
+        // --- TERMS MODAL ---
+        let pendingCheckoutPlan = null;
+
+        function showTermsModal(planType) {
+            pendingCheckoutPlan = planType;
+            const modal = document.getElementById('terms-modal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeTermsModal() {
+            const modal = document.getElementById('terms-modal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            pendingCheckoutPlan = null;
+        }
+
+        function acceptTermsAndProceed() {
+            if (pendingCheckoutPlan) {
+                closeTermsModal();
+                proceedToCheckout(pendingCheckoutPlan);
+            }
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('terms-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeTermsModal();
+            }
+        });
+
         async function checkout(planType) {
+            showTermsModal(planType);
+        }
+
+        async function proceedToCheckout(planType) {
             if (!stripe || !STRIPE_PRICES) {
                 await initializeStripe();
                 if(!stripe) return alert("Payment system initializing...");
