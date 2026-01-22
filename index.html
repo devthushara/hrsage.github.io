@@ -679,7 +679,7 @@
                             <div class="w-[350px] story-tile snap-start bg-white p-8 rounded-[2rem] border border-gray-100 shadow-soft flex flex-col h-full hover:shadow-md transition-shadow">
                                 <p class="text-gray-700 text-lg leading-relaxed mb-6">"Compliance made easy. We use the audit trail feature to document our decision-making process for every termination case."</p>
                                 <div class="mt-auto flex items-center gap-4">
-                                    <img src="https://i.pravatar.cc/150?img=9" alt="Profile" class="w-12 h-12 rounded-full object-cover">
+                                    <img src="https://placehold.co/400x500/e2e2e2/666666?text=Mei+Ling" alt="Profile" class="w-12 h-12 rounded-full object-cover">
                                     <div>
                                         <h4 class="font-bold text-sage-900 text-sm">Mei Ling</h4>
                                         <p class="text-xs text-gray-500">Ops Lead, Retail Group</p>
@@ -737,7 +737,7 @@
                         </div>
                         <div class="bg-[#55554F] p-6 text-center text-white flex-1 flex flex-col justify-center">
                             <h3 class="font-heading font-bold text-lg mb-1">Dato Dr Lim Weng Khuan</h3>
-                            <p class="text-sage-200 text-xs uppercase tracking-wider">Role</p>
+                            <!-- <p class="text-sage-200 text-xs uppercase tracking-wider">Role</p> -->
                         </div>
                     </div>
 
@@ -747,7 +747,7 @@
                         </div>
                         <div class="bg-[#55554F] p-6 text-center text-white flex-1 flex flex-col justify-center">
                             <h3 class="font-heading font-bold text-lg mb-1">Dr Chan Wang Tak</h3>
-                            <p class="text-sage-200 text-xs uppercase tracking-wider">Role</p>
+                            <!-- <p class="text-sage-200 text-xs uppercase tracking-wider">Role</p> -->
                         </div>
                     </div>
 
@@ -757,7 +757,7 @@
                         </div>
                         <div class="bg-[#55554F] p-6 text-center text-white flex-1 flex flex-col justify-center">
                             <h3 class="font-heading font-bold text-lg mb-1">Chin Wai Hong</h3>
-                            <p class="text-sage-200 text-xs uppercase tracking-wider">Role</p>
+                            <!-- <p class="text-sage-200 text-xs uppercase tracking-wider">Role</p> -->
                         </div>
                     </div>
 
@@ -767,7 +767,7 @@
                         </div>
                         <div class="bg-[#55554F] p-6 text-center text-white flex-1 flex flex-col justify-center">
                             <h3 class="font-heading font-bold text-lg mb-1">Melvin Chong</h3>
-                            <p class="text-sage-200 text-xs uppercase tracking-wider">Role</p>
+                            <!-- <p class="text-sage-200 text-xs uppercase tracking-wider">Role</p> -->
                         </div>
                     </div>
 
@@ -777,7 +777,7 @@
                         </div>
                         <div class="bg-[#55554F] p-6 text-center text-white flex-1 flex flex-col justify-center">
                             <h3 class="font-heading font-bold text-lg mb-1">Chong Lii</h3>
-                            <p class="text-sage-200 text-xs uppercase tracking-wider">Role</p>
+                            <!-- <p class="text-sage-200 text-xs uppercase tracking-wider">Role</p> -->
                         </div>
                     </div>
 
@@ -853,7 +853,7 @@
                 <div class="lg:col-span-3">
                     <h4 class="font-bold text-[#1A1A1A] mb-4 text-sm uppercase tracking-wide">Stay Compliant</h4>
                     <p class="text-sm text-gray-500 leading-relaxed mb-6">
-                        Join 4,000+ HR professionals receiving weekly digests on Malaysian Industrial Court Awards.
+                        Join 4,000+ HR professionals receiving weekly digests via HR Sage.
                     </p>
                     <form id="newsletter-form" action="https://formspree.io/f/xlggpybn" method="POST" class="flex items-center gap-2">
                         <input type="email" name="email" placeholder="Enter your email" required class="bg-[#333333] text-cream-100 placeholder:text-gray-400 rounded-full px-4 py-2.5 w-full text-sm focus:outline-none focus:ring-2 focus:ring-gray-600 border-0">
@@ -908,7 +908,7 @@
             </div>
             <div class="px-6 py-6 text-center">
                 <p class="text-gray-700 leading-relaxed mb-5 text-sm">
-                    You've successfully subscribed to our newsletter. Check your inbox for weekly updates on Malaysian Industrial Court Awards.
+                    You've successfully subscribed to our newsletter. Check your inbox for weekly updates via HR Sage.
                 </p>
                 <button onclick="closeNewsletterModal()" class="w-full px-6 py-3 rounded-xl bg-sage-btn hover:bg-opacity-90 text-white font-bold transition-all shadow-lg">
                     Got it!
@@ -1009,10 +1009,8 @@
         }
 
         function acceptTermsAndProceed() {
-            if (pendingCheckoutPlan) {
-                closeTermsModal();
-                proceedToCheckout(pendingCheckoutPlan);
-            }
+            // Temporary: Redirect to VIP page instead of Stripe checkout
+            window.location.href = 'vip.html';
         }
 
         // Close modal when clicking outside
